@@ -1703,3 +1703,472 @@ footer strong {
   color: #8d857a;
   line-height: 1.5;
 }
+
+/* =========================================================
+   POLISH PASS — CONSISTENT TYPOGRAPHY + RESULT COMPARISON
+   ========================================================= */
+
+:root {
+  --font-sans:
+    Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+}
+
+body {
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+strong,
+button,
+label,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+strong {
+  text-wrap: balance;
+}
+
+.panel,
+.trace-panel,
+.results-section,
+.lower-section {
+  overflow: visible;
+}
+
+/* Make the query field actually use the designed query-input styling. */
+.query-input {
+  display: block;
+  font-family: inherit;
+}
+
+/* Make the model selector use the designed selector styling. */
+.manual-model-box > label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--brown-800);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.manual-model-box .model-select {
+  display: block;
+}
+
+/* Cleaner analysis configuration cards. */
+.configuration {
+  margin-top: 24px;
+}
+
+.configuration h4 {
+  margin-bottom: 12px;
+}
+
+.configuration-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.config-item {
+  min-width: 0;
+}
+
+.config-item strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Result image viewer */
+.image-result {
+  min-height: 0;
+  height: clamp(380px, 43vw, 620px);
+  padding: 0;
+  background: #171a18;
+  isolation: isolate;
+}
+
+.single-image-view,
+.comparison-viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.single-image-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.single-image-view > img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+}
+
+.image-badge,
+.comparison-label {
+  position: absolute;
+  z-index: 5;
+  top: 14px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 7px;
+  background: rgba(24, 28, 25, 0.72);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.image-badge-left,
+.comparison-label-before {
+  left: 14px;
+}
+
+.comparison-label-after {
+  right: 14px;
+}
+
+.comparison-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0 !important;
+  max-width: none;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.comparison-before {
+  z-index: 1;
+}
+
+.comparison-after {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.comparison-after-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.comparison-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 6;
+  width: 2px;
+  transform: translateX(-1px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.comparison-handle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--brown-800);
+  color: #fff;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.comparison-range {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.comparison-range:focus-visible {
+  opacity: 1;
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+
+.viewer-controls {
+  min-height: 38px;
+  margin-top: 10px;
+}
+
+.viewer-controls span {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.viewer-controls .comparison-position {
+  color: var(--brown-700);
+  font-weight: 750;
+}
+
+.viewer-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Evidence header was previously styled as a single heading.
+   Make the title and finding count a proper two-column row. */
+.evidence-section .sub-heading,
+.change-story .sub-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.evidence-section .sub-heading h4,
+.change-story .sub-heading h4 {
+  margin: 0;
+  color: var(--brown-800);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.evidence-section .sub-heading > span {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: var(--brown-100);
+  color: var(--brown-700);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.evidence-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.evidence-item > span {
+  min-width: 0;
+}
+
+.evidence-item > strong {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border-radius: 5px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+/* Analysis details: fixed the previous marker/text mismatch. */
+.story {
+  display: grid;
+  gap: 0;
+}
+
+.story-step {
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 11px;
+  min-height: 58px;
+}
+
+.story-step::before {
+  left: 15px;
+  top: 32px;
+  bottom: -1px;
+}
+
+.story-marker {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: var(--brown-100);
+  color: var(--brown-700);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+  z-index: 1;
+}
+
+.story-content {
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.story-content strong {
+  display: block;
+  color: var(--brown-800);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.story-content span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+/* Cleaner result panel on narrower screens. */
+.result-panel {
+  min-width: 0;
+}
+
+.result-description {
+  overflow-wrap: anywhere;
+}
+
+/* The trace now contains six steps, so make the desktop layout adapt. */
+.trace-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.trace-label {
+  color: var(--muted-light);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Prevent inline report actions from inheriting inconsistent browser fonts. */
+.report-actions button {
+  font-family: inherit;
+}
+
+/* =========================================================
+   POLISH PASS — RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1150px) {
+  .trace-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .image-result {
+    height: 500px;
+  }
+}
+
+@media (max-width: 700px) {
+  .configuration-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-result {
+    height: 330px;
+  }
+
+  .comparison-handle {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .comparison-label,
+  .image-badge {
+    top: 10px;
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+
+  .comparison-label-before,
+  .image-badge-left {
+    left: 10px;
+  }
+
+  .comparison-label-after {
+    right: 10px;
+  }
+
+  .trace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .viewer-controls {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 430px) {
+  .image-result {
+    height: 285px;
+  }
+
+  .result-header {
+    flex-direction: column;
+  }
+
+  .confidence {
+    align-self: flex-start;
+  }
+
+  .evidence-item {
+    flex-direction: column;
+  }
+
+  .evidence-item > strong {
+    align-self: flex-start;
+  }
+}
